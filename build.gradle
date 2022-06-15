@@ -23,6 +23,9 @@ dependencies {
     implementation 'ca.uhn.hapi:hapi-structures-v23:2.3'
     // https://mavenlibs.com/maven/dependency/ca.uhn.hapi/hapi-structures-v25
     implementation 'ca.uhn.hapi:hapi-structures-v25:2.3'
+    // https://mvnrepository.com/artifact/org.apache.camel/camel-fhir
+    implementation 'org.apache.camel:camel-fhir:3.2.0'
+
     // https://mavenlibs.com/maven/dependency/org.apache.camel/camel-hl7
     implementation 'org.apache.camel:camel-hl7:3.16.0'
 }
