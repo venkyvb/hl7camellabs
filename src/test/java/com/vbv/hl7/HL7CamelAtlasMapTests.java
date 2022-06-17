@@ -1,5 +1,6 @@
 package com.vbv.hl7;
 
+
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.model.v23.message.ADT_A08;
 import ca.uhn.hl7v2.model.v23.segment.PID;
@@ -16,7 +17,7 @@ import org.junit.Rule;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.jupiter.api.Test;
 
-public class HL7SimpleRouteTests extends CamelTestSupport {
+public class HL7CamelAtlasMapTests extends CamelTestSupport {
 
     @Rule
     SystemOutRule systemOutRule = new SystemOutRule().enableLog();
@@ -39,30 +40,7 @@ public class HL7SimpleRouteTests extends CamelTestSupport {
                                 System.out.println("XML version: " + xmlPayload);
                             }
                         })
-                        .process(new Processor() {
-                            @Override
-                            public void process(Exchange exchange) throws Exception {
-                                final ADT_A08 msg = exchange.getIn().getBody(ADT_A08.class);
-                                final PID pid = msg.getPID();
-                                String surname = pid.getPatientName(0).getFamilyName().getValue();
-                                String givenName = pid.getPatientName(0).getGivenName().getValue();
-                                String patientId = pid.getPid3_PatientIDInternalID(0).getCx1_ID().getValue();
-                                Patient patient = new Patient();
-                                patient.addName().addGiven(givenName);
-                                patient.getNameFirstRep().setFamily(surname);
-                                patient.setId(patientId);
-                                exchange.getIn().setBody(patient);
-                            }
-                        })
-                        .marshal().fhirJson("R4")
-                        .process(new Processor() {
-                            @Override
-                            public void process(Exchange exchange) throws Exception {
-                                System.out.println("FHIR JSON: " + exchange.getIn().getBody(String.class));
-                            }
-                        })
-                        .convertBodyTo(String.class)
-                        .to("mock:result");
+                        .to("atlas:fhir-mapping.adm");
             }
         };
     }
@@ -72,9 +50,9 @@ public class HL7SimpleRouteTests extends CamelTestSupport {
         MockEndpoint mock = getMockEndpoint("mock:result");
         mock.expectedMessageCount(1);
         mock.expectedBodyReceived().body(String.class);
+        System.out.println(mock);
 
         assertMockEndpointsSatisfied();
 
     }
 }
-

@@ -28,6 +28,12 @@ dependencies {
 
     // https://mavenlibs.com/maven/dependency/org.apache.camel/camel-hl7
     implementation 'org.apache.camel:camel-hl7:3.16.0'
+
+    // https://mvnrepository.com/artifact/org.apache.camel/camel-main
+    implementation 'org.apache.camel:camel-main:3.16.0'
+
+    // https://mvnrepository.com/artifact/org.apache.camel/camel-atlasmap
+    implementation 'org.apache.camel:camel-atlasmap:3.16.0'
 }
 
 test {
