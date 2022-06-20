@@ -26,7 +26,7 @@ public class HL7SimpleRouteTests extends CamelTestSupport {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("file:src/test/resources/hl7?noop=true")
+                from("file:src/test/resources/hl7?fileName=complexMessage.hl7&noop=true")
                         .convertBodyTo(String.class)
                         .unmarshal()
                         .hl7(false)

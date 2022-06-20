@@ -3,7 +3,6 @@ import ca.uhn.hl7v2.parser.DefaultXMLParser;
 import ca.uhn.hl7v2.parser.XMLParser;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.main.Main;
 
