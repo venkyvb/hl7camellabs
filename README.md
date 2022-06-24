@@ -1,5 +1,5 @@
 # hl7camellabs
-Some simple tests around transforming HL7v2.x to different formats like XML, JSON and FHIR.
+Some simple tests around transforming HL7v2.x to different formats like XML, JSON and FHIR using different approaches.
 
 The sample HL7 message is available [here.](https://github.com/venkyvb/hl7camellabs/blob/main/src/test/resources/hl7/message.hl7)
 
